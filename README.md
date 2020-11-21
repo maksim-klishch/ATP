@@ -1,0 +1,2 @@
+# ATP
+Automated theorem prooving
