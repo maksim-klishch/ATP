@@ -11,7 +11,7 @@ public:
     Resolution();
 
     void addCNF(const CNF& cnf);
-    bool proof();
+    bool proof() const;
 };
 
 #endif // RESOLUTION_H

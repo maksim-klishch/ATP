@@ -23,9 +23,11 @@ public:
     unsigned short getVariablesCount() const;
 
     static CNF split(const CNF& a, const CNF& b);
+
+    //check if there are same variables in CNFs, but different in negation
     static bool canUseResolutionRule(const CNF& a, const CNF& b);
 
-    void print() const
+    void print() const //print list of variables to console
     {
         std::map<std::string, bool>::const_iterator iter;
         for(iter = variables.begin(); iter != variables.end(); ++iter)

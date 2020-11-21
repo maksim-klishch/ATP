@@ -9,7 +9,7 @@
 #include "Expression/variable.h"
 
 #include "Expression/variablesregister.h"
-#include "Expression/const.h"
+#include "Expression/atom.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -25,33 +25,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    CNF a, b, c, d;
-    a.addVariable("A", 0);
-    a.addVariable("B", 0);
-    a.addVariable("C", 0);
-
-    b.addVariable("A", 1);
-    b.addVariable("B", 0);
-    b.addVariable("C", 0);
-
-    c.addVariable("C", 1);
-
-    d.addVariable("B", 0);
-
-    //CNF f = CNF::split(a, b);
-    //f = CNF::split(f, c);
-    //f.print();
-
-    Resolution resolution;
-    resolution.addCNF(a);
-    resolution.addCNF(b);
-    resolution.addCNF(c);
-    resolution.addCNF(d);
-
-    std::cout << resolution.proof() << std::endl;
-
-    ui->textEdit->setText(QString("%1").arg(1));
-
-    VariablesRegister reg;
-    reg.addVariable(new Const("A"));
+    AND a;
+    OR b, c;
+    b.setTerms(new Atom("A"), new Atom("B"));
+    c.setTerms(new Atom("C"), new Atom("D"));
+    a.setTerms(&b, &c);
+    std::cout << a.toString() << std::endl;
 }

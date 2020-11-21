@@ -25,7 +25,7 @@ void Resolution::addCNF(const CNF &cnf)
     _cnfs.push_back(cnf);
 }
 
-bool Resolution::proof()
+bool Resolution::proof() const
 {
     std::list<CNF>::const_iterator iter;
     for(iter = _cnfs.begin(); iter != _cnfs.end(); ++iter)

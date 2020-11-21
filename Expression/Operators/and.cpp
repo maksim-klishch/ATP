@@ -10,7 +10,12 @@ bool AND::getValue() const
     return left->getValue() && right->getValue();
 }
 
-std::string AND::toString() const
+std::string AND::getType() const
 {
-    return (left ? left->toString() : "") + " AND " + (right ? right->toString() : "");
+    return "AND";
+}
+
+unsigned short AND::getPredenceLevel() const
+{
+    return 1;
 }

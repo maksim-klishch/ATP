@@ -5,8 +5,12 @@
 
 class Expression : public Variable
 {
-    Term* term;
+    Term* _term;
 public:
+    Expression(std::string name);
+    Expression(std::string name, Term* term);
+
+    virtual std::string getType() const;
 };
 
 #endif // EXPRESSION_H

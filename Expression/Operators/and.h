@@ -9,7 +9,8 @@ public:
     AND();
 
     bool getValue() const;
-    std::string toString() const;
+    std::string getType() const;
+    unsigned short getPredenceLevel() const;
 };
 
 #endif // AND_H

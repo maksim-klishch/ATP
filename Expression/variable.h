@@ -8,15 +8,17 @@
 class Variable : public Term
 {
 protected:
-    std::string _name;
+    std::string _name; 
 public:
     Variable();
     Variable(std::string name);
 
-    bool getValue() const {return 1;}
+    virtual bool getValue() const {return 1;}
 
-    std::string toString() const;
-    std::string getName() const;
+    virtual std::string toString() const;
+    virtual std::string getName() const;
+
+    virtual std::string getType() const;
 };
 
 #endif // VARIABLE_H

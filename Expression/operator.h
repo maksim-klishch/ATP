@@ -14,9 +14,11 @@ public:
 
     virtual ~Operator();
 
-    void setLeftTerm(Term* term);
-    void setRightTerm(Term* term);
-    void setTerms(Term* left, Term* right);
+    virtual void setLeftTerm(Term* term);
+    virtual void setRightTerm(Term* term);
+    virtual void setTerms(Term* left, Term* right);
+
+    virtual std::string toString() const;
 };
 
 #endif // OPERATOR_H
