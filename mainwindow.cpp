@@ -6,6 +6,7 @@
 
 #include "Expression/Operators/and.h"
 #include "Expression/Operators/or.h"
+#include "Expression/Operators/not.h"
 #include "Expression/variable.h"
 
 #include "Expression/variablesregister.h"
@@ -27,8 +28,10 @@ void MainWindow::on_pushButton_clicked()
 {
     AND a;
     OR b, c;
+    NOT n;
     b.setTerms(new Atom("A"), new Atom("B"));
+    n.setTerm(&b);
     c.setTerms(new Atom("C"), new Atom("D"));
-    a.setTerms(&b, &c);
-    std::cout << a.toString() << std::endl;
+    a.setTerms(&c, &n);
+    ui->textEdit->setText(QString(a.toString().c_str()));
 }

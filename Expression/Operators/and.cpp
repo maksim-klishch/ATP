@@ -5,6 +5,11 @@ AND::AND()
 
 }
 
+AND::AND(Term* left, Term* right) : BinaryOperator(left, right)
+{
+
+}
+
 bool AND::getValue() const
 {
     return left->getValue() && right->getValue();

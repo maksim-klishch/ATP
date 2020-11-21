@@ -1,4 +1,5 @@
 #include "or.h"
+#include "and.h"
 
 OR::OR()
 {

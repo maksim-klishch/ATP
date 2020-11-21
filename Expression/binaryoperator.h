@@ -1,18 +1,19 @@
-#ifndef OPERATOR_H
-#define OPERATOR_H
+#ifndef BINARYOPERATOR_H
+#define BINARYOPERATOR_H
 
 #include <vector>
 
 #include "term.h"
 
-class Operator : public Term
+class BinaryOperator : public Term
 {
 protected:
     Term *left, *right;
 public:
-    Operator();
+    BinaryOperator();
+    BinaryOperator(Term* left, Term* right);
 
-    virtual ~Operator();
+    virtual ~BinaryOperator();
 
     virtual void setLeftTerm(Term* term);
     virtual void setRightTerm(Term* term);
@@ -21,4 +22,4 @@ public:
     virtual std::string toString() const;
 };
 
-#endif // OPERATOR_H
+#endif //BINARYOPERATOR_H

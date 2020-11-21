@@ -1,9 +1,9 @@
 #ifndef OR_H
 #define OR_H
 
-#include "Expression/operator.h"
+#include "Expression/binaryoperator.h"
 
-class OR : public Operator
+class OR : public BinaryOperator
 {
     const unsigned short predenceLevel = 2;
 public:

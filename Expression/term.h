@@ -4,7 +4,7 @@
 #include <string>
 #include <list>
 
-#include "CNF/cnf.h"
+#include "CNF/resolution.h"
 
 class Term
 {

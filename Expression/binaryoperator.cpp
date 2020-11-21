@@ -1,33 +1,39 @@
-#include "operator.h"
+#include "binaryoperator.h"
 
-Operator::Operator()
+BinaryOperator::BinaryOperator()
 {
 
 }
 
-Operator::~Operator()
+BinaryOperator::BinaryOperator(Term *left, Term *right)
+{
+    this->left = left;
+    this->right = right;
+}
+
+BinaryOperator::~BinaryOperator()
 {
     //if(left) delete left;
     //if(right) delete right;
 }
 
-void Operator::setLeftTerm(Term *term)
+void BinaryOperator::setLeftTerm(Term *term)
 {
     left = term;
 }
 
-void Operator::setRightTerm(Term *term)
+void BinaryOperator::setRightTerm(Term *term)
 {
     right = term;
 }
 
-void Operator::setTerms(Term *left, Term *right)
+void BinaryOperator::setTerms(Term *left, Term *right)
 {
     this->setLeftTerm(left);
     this->setRightTerm(right);
 }
 
-std::string Operator::toString() const
+std::string BinaryOperator::toString() const
 {
     std::string res = "";
 

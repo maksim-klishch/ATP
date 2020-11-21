@@ -32,10 +32,12 @@ SOURCES += \
     CNF/cnf.cpp \
     CNF/resolution.cpp \
     Expression/Operators/or.cpp \
-    Expression/operator.cpp \
     Expression/variablesregister.cpp \
     Expression/expression.cpp \
-    Expression/atom.cpp
+    Expression/atom.cpp \
+    Expression/binaryoperator.cpp \
+    Expression/unaryoperator.cpp \
+    Expression/Operators/not.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,10 +47,12 @@ HEADERS += \
     CNF/cnf.h \
     CNF/resolution.h \
     Expression/Operators/or.h \
-    Expression/operator.h \
     Expression/variablesregister.h \
     Expression/expression.h \
-    Expression/atom.h
+    Expression/atom.h \
+    Expression/binaryoperator.h \
+    Expression/unaryoperator.h \
+    Expression/Operators/not.h
 
 FORMS += \
         mainwindow.ui
