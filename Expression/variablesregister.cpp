@@ -20,6 +20,11 @@ void VariablesRegister::addVariable(Variable *var)
 
 Variable* VariablesRegister::getVariable(std::string name)
 {
-    if(variables.find(name) == variables.end()) return nullptr;
-    return variables[name];
+    if(hasVariable(name)) return variables[name];
+    return nullptr;
+}
+
+bool VariablesRegister::hasVariable(std::string name)
+{
+    return variables.find(name) != variables.end();
 }

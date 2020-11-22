@@ -13,3 +13,8 @@ std::string Expression::getType() const
 {
     return "Expression";
 }
+
+std::string Expression::toString() const
+{
+    return _term->toString();
+}

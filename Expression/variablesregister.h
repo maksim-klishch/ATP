@@ -13,6 +13,7 @@ public:
 
     void addVariable(Variable* var);
     Variable* getVariable(std::string name);
+    bool hasVariable(std::string name);
 };
 
 #endif // VARIABLESREGISTER_H

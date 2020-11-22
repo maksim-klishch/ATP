@@ -5,7 +5,6 @@
 
 class OR : public BinaryOperator
 {
-    const unsigned short predenceLevel = 2;
 public:
     OR();
 

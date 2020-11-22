@@ -11,6 +11,7 @@ public:
     Expression(std::string name, Term* term);
 
     virtual std::string getType() const;
+    std::string toString() const;
 };
 
 #endif // EXPRESSION_H

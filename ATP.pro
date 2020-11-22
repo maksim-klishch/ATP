@@ -26,33 +26,35 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    Expression/term.cpp \
-    Expression/Operators/and.cpp \
-    Expression/variable.cpp \
     CNF/cnf.cpp \
     CNF/resolution.cpp \
+    Expression/Operators/and.cpp \
+    Expression/Operators/not.cpp \
     Expression/Operators/or.cpp \
-    Expression/variablesregister.cpp \
-    Expression/expression.cpp \
     Expression/atom.cpp \
     Expression/binaryoperator.cpp \
+    Expression/expression.cpp \
+    Expression/term.cpp \
     Expression/unaryoperator.cpp \
-    Expression/Operators/not.cpp
+    Expression/variable.cpp \
+    Expression/variablesregister.cpp \
+    Interpreter/interpreter.cpp
 
 HEADERS += \
         mainwindow.h \
-    Expression/term.h \
-    Expression/Operators/and.h \
-    Expression/variable.h \
     CNF/cnf.h \
     CNF/resolution.h \
+    Expression/Operators/and.h \
+    Expression/Operators/not.h \
     Expression/Operators/or.h \
-    Expression/variablesregister.h \
-    Expression/expression.h \
     Expression/atom.h \
     Expression/binaryoperator.h \
+    Expression/expression.h \
+    Expression/term.h \
     Expression/unaryoperator.h \
-    Expression/Operators/not.h
+    Expression/variable.h \
+    Expression/variablesregister.h \
+    Interpreter/interpreter.h
 
 FORMS += \
         mainwindow.ui
