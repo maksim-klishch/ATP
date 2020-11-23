@@ -15,9 +15,12 @@ public:
 
     virtual ~BinaryOperator();
 
-    virtual void setLeftTerm(Term* term);
-    virtual void setRightTerm(Term* term);
-    virtual void setTerms(Term* left, Term* right);
+    virtual void setLeftOperand(Term* term);
+    virtual void setRightOperand(Term* term);
+    virtual void setOperands(Term* left, Term* right);
+
+    virtual Term* getLeftOperand();
+    virtual Term* getRightOperand();
 
     virtual std::string toString() const;
 };

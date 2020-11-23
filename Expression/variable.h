@@ -12,8 +12,7 @@ protected:
 public:
     Variable();
     Variable(std::string name);
-
-    virtual bool getValue() const {return 1;}
+    virtual ~Variable();
 
     virtual std::string toString() const;
     virtual std::string getName() const;

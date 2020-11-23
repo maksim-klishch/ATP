@@ -14,7 +14,10 @@ public:
     std::string getDescription();
     void setDescription(std::string desc);
 
+    Term* getCopy() const;
     std::string getType() const;
+
+    Term* simplification() const;
 };
 
 #endif // CONST_H

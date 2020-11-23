@@ -4,6 +4,8 @@
 #include "Expression/Operators/not.h"
 #include "Expression/Operators/or.h"
 
+#include "CNF/resolution.h"
+
 void Interpreter::setSpaces(std::string &command, std::string str)
 {
     size_t pos;
@@ -43,6 +45,39 @@ void Interpreter::tokenize(std::string command, std::vector<std::string> &tokens
         command.erase(0, pos + 1);
     }
     tokens.push_back(command);
+}
+
+std::string Interpreter::translateOneCommand(std::string command)
+{
+    std::vector<std::string> tokens;
+    tokenize(command, tokens);
+
+    if(!tokens.size()) return "";
+
+    if(tokens[0] == "atom")
+    {
+        if(tokens.size() < 3) throw "Error: Invalid format.";
+        if(varReg.hasVariable(tokens[1])) throw "Error: Multiple definition of " + tokens[1] + ".";
+
+        std::string desc = "";
+        for(unsigned int i = 2; i < tokens.size(); ++i)
+        {
+            desc += tokens[i];
+        }
+
+        varReg.addVariable(new Atom(tokens[1], desc));
+    }
+
+    if(tokens[0] == "molecule")
+    {
+        if(tokens[2] != "=" or tokens.size() < 4) throw "Error: Invalid format.";
+        if(varReg.hasVariable(tokens[1])) throw "Error: Multiply definition of " + tokens[1] + ".";
+
+        std::vector<std::string> expressionTokens(tokens.begin() + 3, tokens.end());
+        varReg.addVariable(new Expression(tokens[1], toExpressionTree(expressionTokens)));
+    }
+
+    return "";
 }
 
 std::stack<std::string> Interpreter::toPolishReverseNotation(std::vector<std::string> &tokens)
@@ -128,12 +163,12 @@ Term *Interpreter::toExpressionTree(std::stack<std::string> &polishReverseNotati
 
         if(res->getType() == "NOT")
         {
-            ((UnaryOperator*)res)->setTerm(toExpressionTree(polishReverseNotation));
+            ((UnaryOperator*)res)->setOperand(toExpressionTree(polishReverseNotation));
         }
         else
         {
-            ((BinaryOperator*)res)->setRightTerm(toExpressionTree(polishReverseNotation));
-            ((BinaryOperator*)res)->setLeftTerm(toExpressionTree(polishReverseNotation));
+            ((BinaryOperator*)res)->setRightOperand(toExpressionTree(polishReverseNotation));
+            ((BinaryOperator*)res)->setLeftOperand(toExpressionTree(polishReverseNotation));
         }
 
         return res;
@@ -148,47 +183,36 @@ Interpreter::Interpreter()
     operatorsFactory.insert(std::pair<std::string, std::function<Term*()>>("NOT", [](){return new NOT();}));
     operatorsFactory.insert(std::pair<std::string, std::function<Term*()>>("AND", [](){return new AND();}));
     operatorsFactory.insert(std::pair<std::string, std::function<Term*()>>("OR",  [](){return new OR();}));
-
-    varReg.addVariable(new Atom("A"));
-    varReg.addVariable(new Atom("B"));
 }
 
-std::string Interpreter::interprete(std::string command)
+std::string Interpreter::interprete(std::string commands)
 {
     std::string result = "";
 
     try{
-        std::vector<std::string> tokens;
-        tokenize(command, tokens);
-
-        if(!tokens.size()) return "";
-
-        if(tokens[0] == "atom")
+        size_t pos;
+        while((pos = commands.find("\n")) < commands.size())
         {
-            if(tokens.size() < 3) throw "Error: Invalid format.";
-            if(varReg.hasVariable(tokens[1])) throw "Error: Multiple definition of " + tokens[1] + ".";
-
-            std::string desc = "";
-            for(unsigned int i = 2; i < tokens.size(); ++i)
-            {
-                desc += tokens[i];
-            }
-
-            varReg.addVariable(new Atom(tokens[1], desc));
+            translateOneCommand(commands.substr(0, pos));
+            commands.erase(0, pos + 1);
         }
-
-        if(tokens[0] == "molecule")
-        {
-            if(tokens[2] != "=" or tokens.size() < 4) throw "Error: Invalid format.";
-            if(varReg.hasVariable(tokens[1])) throw "Error: Multiply definition of " + tokens[1] + ".";
-
-            std::vector<std::string> expressionTokens(tokens.begin() + 3, tokens.end());
-            varReg.addVariable(new Expression(tokens[1], toExpressionTree(expressionTokens)));
-        }
-
+        if(commands.size() > 0) translateOneCommand(commands);
     } catch(std::string exception) {
         return exception + "\n";
     }
+
+    Term* F1 = new OR(new Atom("A"), new OR(new Atom("B"), new Atom("C")));
+    Term* F2 = new OR(new Atom("A"), new OR(new NOT(new Atom("B")), new Atom("C")));
+    Term* F3 = new NOT(new Atom("C"));
+    Term* P = new Atom("C");
+
+    Resolution resolt;
+    resolt.addCNF(F1);
+    resolt.addCNF(F2);
+    resolt.addCNF(F3);
+    resolt.addCNF(P);
+
+    std::cout << resolt.proof() << std::endl;
 
     return result;
 }

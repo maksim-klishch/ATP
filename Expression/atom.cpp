@@ -25,7 +25,18 @@ void Atom::setDescription(std::string desc)
     _desc = desc;
 }
 
+Term *Atom::getCopy() const
+{
+    return new Atom(_name, _desc);
+}
+
 std::string Atom::getType() const
 {
     return "Atom";
 }
+
+Term *Atom::simplification() const
+{
+    return new Atom(this->_name, this->_desc);
+}
+

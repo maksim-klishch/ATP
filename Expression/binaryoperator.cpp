@@ -13,24 +13,34 @@ BinaryOperator::BinaryOperator(Term *left, Term *right)
 
 BinaryOperator::~BinaryOperator()
 {
-    //if(left) delete left;
-    //if(right) delete right;
+    if(left) delete left;
+    if(right) delete right;
 }
 
-void BinaryOperator::setLeftTerm(Term *term)
+void BinaryOperator::setLeftOperand(Term *term)
 {
     left = term;
 }
 
-void BinaryOperator::setRightTerm(Term *term)
+void BinaryOperator::setRightOperand(Term *term)
 {
     right = term;
 }
 
-void BinaryOperator::setTerms(Term *left, Term *right)
+void BinaryOperator::setOperands(Term *left, Term *right)
 {
-    this->setLeftTerm(left);
-    this->setRightTerm(right);
+    this->setLeftOperand(left);
+    this->setRightOperand(right);
+}
+
+Term *BinaryOperator::getLeftOperand()
+{
+    return left;
+}
+
+Term *BinaryOperator::getRightOperand()
+{
+    return right;
 }
 
 std::string BinaryOperator::toString() const

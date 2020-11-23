@@ -10,9 +10,9 @@ AND::AND(Term* left, Term* right) : BinaryOperator(left, right)
 
 }
 
-bool AND::getValue() const
+Term *AND::getCopy() const
 {
-    return left->getValue() && right->getValue();
+    return new AND(left->getCopy(), right->getCopy());
 }
 
 std::string AND::getType() const
@@ -23,4 +23,9 @@ std::string AND::getType() const
 unsigned short AND::getPredenceLevel() const
 {
     return 1;
+}
+
+Term *AND::simplification() const
+{
+    return new AND(left->simplification(), right->simplification());
 }

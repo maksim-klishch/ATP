@@ -1,17 +1,37 @@
 #include "unaryoperator.h"
 
-void UnaryOperator::setTerm(Term *term)
+UnaryOperator::UnaryOperator()
 {
-    this->term = term;
+
+}
+
+UnaryOperator::UnaryOperator(Term *operand)
+{
+    setOperand(operand);
+}
+
+UnaryOperator::~UnaryOperator()
+{
+    if(operand) delete operand;
+}
+
+void UnaryOperator::setOperand(Term *operand)
+{
+    this->operand = operand;
+}
+
+Term *UnaryOperator::getOperand()
+{
+    return operand;
 }
 
 std::string UnaryOperator::toString() const
 {
     std::string res = getType();
-    if(term)
+    if(operand)
     {
-        if(term->getType() == "Atom") res += " " + term->toString();
-        else res += " (" + term->toString() + ")";
+        if(operand->getType() == "Atom") res += " " + operand->toString();
+        else res += " (" + operand->toString() + ")";
     }
     return res;
 }

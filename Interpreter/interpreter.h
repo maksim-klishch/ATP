@@ -23,13 +23,14 @@ class Interpreter
     void setSpaces(std::string& command, std::string str); //find str in command and set spaces before and after str
     void prepareToTokenize(std::string& command);
     void tokenize(std::string command, std::vector<std::string>& tokens);
+    std::string translateOneCommand(std::string command);
     std::stack<std::string> toPolishReverseNotation(std::vector<std::string>& tokens);
     Term* toExpressionTree(std::vector<std::string>& tokens);
     Term* toExpressionTree(std::stack<std::string>& polishReverseNotation);
 public:
     Interpreter();
 
-    std::string interprete(std::string command);
+    std::string interprete(std::string commands);
 };
 
 #endif // INTERPRETER_H

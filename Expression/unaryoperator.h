@@ -6,9 +6,14 @@
 class UnaryOperator : public Term
 {
 protected:
-    Term* term;
+    Term* operand;
 public:
-    void setTerm(Term* term);
+    UnaryOperator();
+    UnaryOperator(Term* operand);
+    virtual ~UnaryOperator();
+
+    void setOperand(Term* operand);
+    Term* getOperand();
 
     virtual std::string toString() const;
 };

@@ -7,12 +7,15 @@ class OR : public BinaryOperator
 {
 public:
     OR();
+    OR(Term* left, Term* right);
 
-    bool getValue() const;
     std::string toString() const;
 
+    Term* getCopy() const;
     std::string getType() const;
     unsigned short getPredenceLevel() const;
+
+    Term* simplification() const;
 };
 
 #endif // OR_H

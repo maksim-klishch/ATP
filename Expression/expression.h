@@ -9,9 +9,13 @@ class Expression : public Variable
 public:
     Expression(std::string name);
     Expression(std::string name, Term* term);
+    ~Expression();
 
-    virtual std::string getType() const;
+    Term* getCopy() const;
+    std::string getType() const;
     std::string toString() const;
+
+    Term* simplification() const;
 };
 
 #endif // EXPRESSION_H

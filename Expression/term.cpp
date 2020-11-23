@@ -5,6 +5,11 @@ Term::Term()
 
 }
 
+Term::~Term()
+{
+
+}
+
 std::string Term::getType() const
 {
     return "NULL";

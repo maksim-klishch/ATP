@@ -19,5 +19,5 @@ void MainWindow::on_btnRun_clicked()
 {
     Interpreter interpreter;
     std::string commands = ui->scriptEdit->document()->toPlainText().toStdString();
-    interpreter.interprete(commands);
+    ui->textEdit->setText(QString(interpreter.interprete(commands).c_str()));
 }

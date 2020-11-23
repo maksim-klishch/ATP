@@ -9,9 +9,11 @@ public:
     AND();
     AND(Term* left, Term* right);
 
-    bool getValue() const;
+    Term* getCopy() const;
     std::string getType() const;
     unsigned short getPredenceLevel() const;
+
+    Term* simplification() const;
 };
 
 #endif // AND_H
