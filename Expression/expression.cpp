@@ -21,7 +21,7 @@ Term *Expression::getCopy() const
 
 std::string Expression::getType() const
 {
-    return "Expression";
+    return "EXPRESSION";
 }
 
 std::string Expression::toString() const

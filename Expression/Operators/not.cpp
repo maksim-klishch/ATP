@@ -2,27 +2,27 @@
 #include "or.h"
 #include "and.h"
 
-NOT::NOT()
+Not::Not()
 {
 
 }
 
-NOT::NOT(Term *operand) : UnaryOperator(operand)
+Not::Not(Term *operand) : UnaryOperator(operand)
 {
 
 }
 
-Term *NOT::getCopy() const
+Term *Not::getCopy() const
 {
-    return new NOT(operand->getCopy());
+    return new Not(getOperand());
 }
 
-std::string NOT::getType() const
+std::string Not::getType() const
 {
     return "NOT";
 }
 
-Term *NOT::simplification() const
+Term *Not::simplification() const
 {
     Term* tmp = operand->simplification();
 
@@ -30,17 +30,19 @@ Term *NOT::simplification() const
 
     if(tmp->getType() == "AND")
     {
-        Term* left =  (new NOT(((BinaryOperator*)tmp)->getLeftOperand()))->simplification();
-        Term* right = (new NOT(((BinaryOperator*)tmp)->getRightOperand()))->simplification();
-        return new OR(left, right);
+        Term* left =  (Not(((BinaryOperator*)tmp)->getLeftOperand())).simplification();
+        Term* right = (Not(((BinaryOperator*)tmp)->getRightOperand())).simplification();
+        delete tmp;
+        return new Or(left, right);
     }
 
     if(tmp->getType() == "OR")
     {
-        Term* left =  (new NOT(((BinaryOperator*)tmp)->getLeftOperand()))->simplification();
-        Term* right = (new NOT(((BinaryOperator*)tmp)->getRightOperand()))->simplification();
-        return new AND(left, right);
+        Term* left =  Not(((BinaryOperator*)tmp)->getLeftOperand()).simplification();
+        Term* right = Not(((BinaryOperator*)tmp)->getRightOperand()).simplification();
+        delete tmp;
+        return new And(left, right);
     }
 
-    return new NOT(tmp);
+    return new Not(tmp);
 }

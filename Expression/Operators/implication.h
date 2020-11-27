@@ -1,15 +1,13 @@
-#ifndef OR_H
-#define OR_H
+#ifndef IMPLICATION_H
+#define IMPLICATION_H
 
 #include "Expression/binaryoperator.h"
 
-class Or : public BinaryOperator
+class Implication : public BinaryOperator
 {
 public:
-    Or();
-    Or(Term* left, Term* right);
-
-    std::string toString() const;
+    Implication();
+    Implication(Term* left, Term* right);
 
     Term* getCopy() const;
     std::string getType() const;
@@ -18,4 +16,4 @@ public:
     Term* simplification() const;
 };
 
-#endif // OR_H
+#endif // IMPLICATION_H

@@ -16,8 +16,6 @@ public:
 
     virtual std::string toString() const;
     virtual std::string getName() const;
-
-    virtual std::string getType() const;
 };
 
 #endif // VARIABLE_H

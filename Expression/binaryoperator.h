@@ -3,9 +3,9 @@
 
 #include <vector>
 
-#include "term.h"
+#include "operator.h"
 
-class BinaryOperator : public Term
+class BinaryOperator : public Operator
 {
 protected:
     Term *left, *right;
@@ -19,8 +19,8 @@ public:
     virtual void setRightOperand(Term* term);
     virtual void setOperands(Term* left, Term* right);
 
-    virtual Term* getLeftOperand();
-    virtual Term* getRightOperand();
+    virtual Term* getLeftOperand() const;
+    virtual Term* getRightOperand() const;
 
     virtual std::string toString() const;
 };

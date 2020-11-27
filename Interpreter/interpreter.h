@@ -10,19 +10,21 @@
 #include <functional>
 
 #include "Expression/term.h"
-#include "Expression/variablesregister.h"
 #include "Expression/atom.h"
 #include "Expression/expression.h"
+#include "Expression/operator.h"
+
+#include "register.h"
 
 class Interpreter
 {
-    VariablesRegister varReg;
-    std::map<std::string, std::function<Term*()>> operatorsFactory;
-    std::list<std::string> keyword;
+    Register<Variable> varReg;
+    Register<Operator> operReg;
 
-    void setSpaces(std::string& command, std::string str); //find str in command and set spaces before and after str
+    void replaceAll(std::string& command, const std::string& str, const std::string& replace);
+    void setSpaces(std::string& command, const std::string& str); //find str in command and set spaces before and after str
     void prepareToTokenize(std::string& command);
-    void tokenize(std::string command, std::vector<std::string>& tokens);
+    void tokenize(std::string& command, std::vector<std::string>& tokens);
     std::string translateOneCommand(std::string command);
     std::stack<std::string> toPolishReverseNotation(std::vector<std::string>& tokens);
     Term* toExpressionTree(std::vector<std::string>& tokens);

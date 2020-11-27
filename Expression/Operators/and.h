@@ -3,11 +3,11 @@
 
 #include "Expression/binaryoperator.h"
 
-class AND : public BinaryOperator
+class And : public BinaryOperator
 {
 public:
-    AND();
-    AND(Term* left, Term* right);
+    And();
+    And(Term* left, Term* right);
 
     Term* getCopy() const;
     std::string getType() const;

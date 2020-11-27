@@ -2,7 +2,7 @@
 
 UnaryOperator::UnaryOperator()
 {
-
+    operand = nullptr;
 }
 
 UnaryOperator::UnaryOperator(Term *operand)
@@ -20,9 +20,10 @@ void UnaryOperator::setOperand(Term *operand)
     this->operand = operand;
 }
 
-Term *UnaryOperator::getOperand()
+Term *UnaryOperator::getOperand() const
 {
-    return operand;
+    if(!operand) return nullptr;
+    return operand->getCopy();
 }
 
 std::string UnaryOperator::toString() const

@@ -2,7 +2,7 @@
 
 BinaryOperator::BinaryOperator()
 {
-
+    left = right = nullptr;
 }
 
 BinaryOperator::BinaryOperator(Term *left, Term *right)
@@ -33,14 +33,16 @@ void BinaryOperator::setOperands(Term *left, Term *right)
     this->setRightOperand(right);
 }
 
-Term *BinaryOperator::getLeftOperand()
+Term *BinaryOperator::getLeftOperand() const
 {
-    return left;
+    if(!left) return nullptr;
+    return left->getCopy();
 }
 
-Term *BinaryOperator::getRightOperand()
+Term *BinaryOperator::getRightOperand() const
 {
-    return right;
+    if(!right) return nullptr;
+    return right->getCopy();
 }
 
 std::string BinaryOperator::toString() const

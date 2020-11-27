@@ -3,11 +3,11 @@
 
 #include "Expression/unaryoperator.h"
 
-class NOT : public UnaryOperator
+class Not : public UnaryOperator
 {
 public:
-    NOT();
-    NOT(Term* operand);
+    Not();
+    Not(Term* operand);
 
     Term* getCopy() const;
     std::string getType() const;

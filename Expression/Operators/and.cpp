@@ -1,31 +1,31 @@
 #include "and.h"
 
-AND::AND()
+And::And()
 {
 
 }
 
-AND::AND(Term* left, Term* right) : BinaryOperator(left, right)
+And::And(Term* left, Term* right) : BinaryOperator(left, right)
 {
 
 }
 
-Term *AND::getCopy() const
+Term *And::getCopy() const
 {
-    return new AND(left->getCopy(), right->getCopy());
+    return new And(getLeftOperand(), getRightOperand());
 }
 
-std::string AND::getType() const
+std::string And::getType() const
 {
     return "AND";
 }
 
-unsigned short AND::getPredenceLevel() const
+unsigned short And::getPredenceLevel() const
 {
     return 1;
 }
 
-Term *AND::simplification() const
+Term *And::simplification() const
 {
-    return new AND(left->simplification(), right->simplification());
+    return new And(left->simplification(), right->simplification());
 }

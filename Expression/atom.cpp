@@ -32,11 +32,11 @@ Term *Atom::getCopy() const
 
 std::string Atom::getType() const
 {
-    return "Atom";
+    return "ATOM";
 }
 
 Term *Atom::simplification() const
 {
-    return new Atom(this->_name, this->_desc);
+    return getCopy();
 }
 

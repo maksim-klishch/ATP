@@ -18,6 +18,10 @@ public:
 private slots:
     void on_btnRun_clicked();
 
+    void on_btnSave_clicked();
+
+    void on_btnLoad_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -1,54 +1,58 @@
 #include "or.h"
 #include "and.h"
 
-OR::OR()
+Or::Or()
 {
 
 }
 
-OR::OR(Term* left, Term* right) : BinaryOperator(left, right)
+Or::Or(Term* left, Term* right) : BinaryOperator(left, right)
 {
 
 }
 
-std::string OR::toString() const
+std::string Or::toString() const
 {
-    return (left ? left->toString() : "") + " OR " + (right ? right->toString() : "");
+    return (left ? left->toString() : "") + " Or " + (right ? right->toString() : "");
 }
 
-Term *OR::getCopy() const
+Term *Or::getCopy() const
 {
-    return new OR(left->getCopy(), right->getCopy());
+    return new Or(getLeftOperand(), getRightOperand());
 }
 
-std::string OR::getType() const
+std::string Or::getType() const
 {
     return "OR";
 }
 
-unsigned short OR::getPredenceLevel() const
+unsigned short Or::getPredenceLevel() const
 {
     return 2;
 }
 
-Term *OR::simplification() const
+Term *Or::simplification() const
 {
     Term* tmpLeft = left->simplification();
     Term* tmpRight = right->simplification();
 
     if(tmpRight->getType() == "AND")
     {
-        Term* leftRes = (new OR(tmpLeft, ((BinaryOperator*)tmpRight)->getLeftOperand()))->simplification();
-        Term* rightRes = (new OR(tmpLeft, ((BinaryOperator*)tmpRight)->getRightOperand()))->simplification();
-        return new AND(leftRes, rightRes);
+        Term* leftRes = Or(tmpLeft->getCopy(), ((BinaryOperator*)tmpRight)->getLeftOperand()).simplification();
+        Term* rightRes = Or(tmpLeft->getCopy(), ((BinaryOperator*)tmpRight)->getRightOperand()).simplification();
+        delete tmpLeft;
+        delete tmpRight;
+        return new And(leftRes, rightRes);
     }
 
     if(tmpLeft->getType() == "AND")
     {
-        Term* leftRes = (new OR(((BinaryOperator*)tmpLeft)->getLeftOperand(), tmpRight))->simplification();
-        Term* rightRes = (new OR(((BinaryOperator*)tmpLeft)->getRightOperand(), tmpRight))->simplification();
-        return new AND(leftRes, rightRes);
+        Term* leftRes = Or(((BinaryOperator*)tmpLeft)->getLeftOperand(), tmpRight->getCopy()).simplification();
+        Term* rightRes = Or(((BinaryOperator*)tmpLeft)->getRightOperand(), tmpRight->getCopy()).simplification();
+        delete tmpLeft;
+        delete tmpRight;
+        return new And(leftRes, rightRes);
     }
 
-    return new OR(tmpLeft, tmpRight);
+    return new Or(tmpLeft, tmpRight);
 }

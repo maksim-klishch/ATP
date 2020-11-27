@@ -1,9 +1,9 @@
 #ifndef UNARYOPERATOR_H
 #define UNARYOPERATOR_H
 
-#include "term.h"
+#include "operator.h"
 
-class UnaryOperator : public Term
+class UnaryOperator : public Operator
 {
 protected:
     Term* operand;
@@ -13,7 +13,7 @@ public:
     virtual ~UnaryOperator();
 
     void setOperand(Term* operand);
-    Term* getOperand();
+    Term* getOperand() const;
 
     virtual std::string toString() const;
 };
